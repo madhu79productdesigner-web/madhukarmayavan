@@ -67,9 +67,6 @@ nav a:hover{color:#1d3a6b;}
 .ha-stat:last-child{border-right:none;}
 .ha-stat .n{font-family:Georgia,serif;font-size:36px;font-weight:700;color:#c8a96e;line-height:1;}
 .ha-stat .d{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:#666666;margin-top:6px;letter-spacing:0.04em;}
-.ha-tags{display:flex;flex-wrap:wrap;gap:10px;}
-.ha-tag{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:#aaaaaa;border:1px solid rgba(255,255,255,0.15);border-radius:100px;padding:7px 16px;letter-spacing:0.02em;transition:all 0.2s;cursor:default;}
-.ha-tag:hover{border-color:#c8a96e;color:#c8a96e;}
 .ha-right{position:relative;align-self:center;}
 .ha-photo-wrap{position:relative;display:inline-block;width:100%;z-index:1;}
 .ha-photo-wrap::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120%;height:120%;background:radial-gradient(ellipse at center,rgba(200,169,110,0.55) 0%,rgba(200,169,110,0.25) 40%,transparent 70%);z-index:0;filter:blur(60px);border-radius:50%;pointer-events:none;}
@@ -87,16 +84,13 @@ nav a:hover{color:#1d3a6b;}
 .ha-cmp-tag-l{left:6%;}
 .ha-cmp-tag-r{right:6%;}
 .ha-cmp-tag.hide{opacity:0;}
-.ha-years-badge{position:absolute;bottom:60px;left:-24px;background:#c8a96e;padding:20px 24px;z-index:10;}
-.ha-years-badge .num{font-family:Georgia,serif;font-size:42px;font-weight:700;color:#0f0f0f;line-height:1;}
-.ha-years-badge .txt{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:11px;font-weight:600;color:#0f0f0f;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
 .ha-ticker{width:100%;background:#000000;border-top:0.5px solid #1a1a1a;padding:18px 0;overflow:hidden;white-space:nowrap;margin-top:80px;}
 .ticker-track{display:inline-flex;animation:ticker 40s linear infinite;}
 .ticker-track span{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:0.08em;color:#555555;padding:0 28px;}
 .ticker-track span.bold{font-weight:600;color:#bbbbbb;}
 .ticker-track span.italic{font-style:italic;color:#777777;}
 @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-@media(max-width:900px){.hero-about-inner{grid-template-columns:1fr;gap:48px;}.hero-about{padding:72px 24px 0;}.ha-name{font-size:36px;}.ha-right{order:-1;}.ha-photo-wrap img{max-width:360px;}.ha-years-badge{left:0;}}
+@media(max-width:900px){.hero-about-inner{grid-template-columns:1fr;gap:48px;}.hero-about{padding:72px 24px 0;}.ha-name{font-size:36px;}.ha-right{order:-1;}.ha-photo-wrap img{max-width:360px;}}
 @media(max-width:480px){.ha-name{font-size:28px;}.ha-title{font-size:18px;}.hero-about{padding:48px 16px 0;}}
 
 /* EXPERIENCE */
@@ -970,16 +964,6 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="ha-stat"><div class="n">100%</div><div class="d">WCAG Accessibility Compliant Work</div></div>
         <div class="ha-stat"><div class="n">Million+</div><div class="d">Users Impacted Across Products</div></div>
       </div>
-      <div class="ha-tags">
-        <span class="ha-tag">Enterprise UX</span>
-        <span class="ha-tag">FinTech</span>
-        <span class="ha-tag">B2B SaaS</span>
-        <span class="ha-tag">Design Systems</span>
-        <span class="ha-tag">User Research</span>
-        <span class="ha-tag">AI-Assisted Design</span>
-        <span class="ha-tag">Accessibility</span>
-        <span class="ha-tag">Figma</span>
-      </div>
     </div>
     <div class="ha-right">
       <div class="ha-photo-wrap">
@@ -994,10 +978,6 @@ window.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
 
-        <div class="ha-years-badge">
-          <div class="num">13+</div>
-          <div class="txt">Years of<br>Experience</div>
-        </div>
       </div>
     </div>
   </div>
