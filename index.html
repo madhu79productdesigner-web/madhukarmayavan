@@ -38,7 +38,7 @@ nav a:hover{color:#1d3a6b;}
 /* HERO-ABOUT */
 .hero-about{width:100%;background:#000000;padding:120px 48px 0;position:relative;overflow:hidden;}
 .hero-about::before{content:'MADHU';position:absolute;top:-20px;right:-20px;font-family:Georgia,serif;font-size:220px;font-weight:700;color:rgba(255,255,255,0.025);letter-spacing:-8px;pointer-events:none;white-space:nowrap;}
-.hero-about-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.hero-about-inner{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start;position:relative;z-index:1;}
 .ha-left{color:#ffffff;}
 .ha-label{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#c8a96e;margin-bottom:20px;display:flex;align-items:center;gap:12px;}
 .ha-label::after{content:'';width:48px;height:1px;background:#c8a96e;display:block;}
@@ -67,7 +67,8 @@ nav a:hover{color:#1d3a6b;}
 .ha-stat:last-child{border-right:none;}
 .ha-stat .n{font-family:Georgia,serif;font-size:36px;font-weight:700;color:#c8a96e;line-height:1;}
 .ha-stat .d{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13px;color:#666666;margin-top:6px;letter-spacing:0.04em;}
-.ha-right{position:relative;align-self:center;}
+.ha-right{position:relative;align-self:start;}
+@media(min-width:901px){.ha-right{margin-top:44px;}}
 .ha-photo-wrap{position:relative;display:inline-block;width:100%;z-index:1;}
 .ha-photo-wrap::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120%;height:120%;background:radial-gradient(ellipse at center,rgba(200,169,110,0.55) 0%,rgba(200,169,110,0.25) 40%,transparent 70%);z-index:0;filter:blur(60px);border-radius:50%;pointer-events:none;}
 .ha-photo-wrap img{width:100%;display:block;position:relative;z-index:1;mask-image:linear-gradient(to top,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 30%);-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 30%);}
@@ -112,6 +113,19 @@ nav a:hover{color:#1d3a6b;}
 .wf-rule{max-width:calc(1440px - 96px);margin:40px auto 0;height:1px;background:rgba(255,255,255,0.07);}
 .wf-impact-row{max-width:1440px;margin:0 auto;padding:48px;display:grid;grid-template-columns:1.4fr 1px 1fr 1px 1fr 1px 1fr;align-items:center;gap:0;}
 .wf-impact-vr{width:1px;height:80px;background:rgba(255,255,255,0.08);}
+.wf-more{max-height:calc(16px * 1.8 * 4);overflow:hidden;transition:max-height 0.5s ease;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent);}
+.wf-more.open{max-height:3000px;-webkit-mask-image:none;mask-image:none;}
+.wf-more-extra{grid-column:1/-1;display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.5s ease;}
+.wf-more-extra.open{grid-template-rows:1fr;}
+.wf-more-extra-inner{overflow:hidden;min-height:0;}
+.wf-more-actions{grid-column:1/-1;}
+.wf-more-list{margin:28px 0 0;padding-left:18px;list-style:none;columns:2;column-gap:64px;}
+@media(max-width:900px){.wf-more-list{columns:1;}}
+.wf-more-list li{position:relative;break-inside:avoid;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.75;color:rgba(255,255,255,0.55);margin-bottom:10px;}
+.wf-more-list li::before{content:'';position:absolute;left:-16px;top:0.75em;width:6px;height:6px;border-radius:50%;background:#c8a96e;}
+.wf-more-list li strong{color:rgba(255,255,255,0.85);font-weight:500;}
+.wf-more-btn{margin-top:14px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;font-weight:500;color:#c8a96e;background:none;border:none;border-bottom:1px solid rgba(200,169,110,0.5);padding:4px 0;cursor:pointer;transition:all 0.2s;}
+.wf-more-btn:hover{color:#ffffff;border-color:#ffffff;}
 .wf-impact-desc{padding-right:48px;}
 .wf-impact-desc p{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;color:rgba(255,255,255,0.55);line-height:1.8;}
 .wf-impact-desc p strong{color:rgba(255,255,255,0.85);font-weight:500;}
@@ -766,6 +780,14 @@ function toggleHaPanel(panelId, btnId){
   b.setAttribute('aria-expanded',String(open));
   if(btnId==='haFullBtn'){ b.querySelector('span').textContent = open ? 'Hide full profile' : 'Read full profile'; }
 }
+function toggleWfMore(){
+  var p=document.getElementById('wfMore'), b=document.getElementById('wfMoreBtn');
+  var open=!p.classList.contains('open');
+  p.classList.toggle('open',open);
+  document.getElementById('wfMoreExtra').classList.toggle('open',open);
+  b.setAttribute('aria-expanded',String(open));
+  b.textContent = open ? 'Show less' : 'Read more';
+}
 function scrollToSection(id) {
   if (!id || id === '' || id === '#') return false;
   var el = document.getElementById(id);
@@ -945,22 +967,25 @@ window.addEventListener('DOMContentLoaded', function() {
       <p class="ha-sub">Crafting experiences that people love, and businesses trust.</p>
       <div class="ha-divider"></div>
       <div class="ha-body">
-        <p class="ha-hook"><strong>Senior Product Designer</strong> with 13+ years turning complex enterprise, fintech, and ATM workflows into clear, user-centered products. I pair design craft with business analysis to take ideas from discovery to delivery.</p>
-      </div>
-      <div class="ha-actions">
-        <button type="button" class="ha-btn-link" id="haFullBtn" aria-expanded="false" aria-controls="haFull" onclick="toggleHaPanel('haFull','haFullBtn')"><span>Read full profile</span></button>
+        <p class="ha-hook">I’m a <strong>technology and digital product professional</strong> with 14+ years of experience spanning Business Analysis, IT Project Management, and Product Design, primarily within complex enterprise and financial services environments.</p>
       </div>
       <div class="ha-panel" id="haFull"><div class="ha-panel-inner">
         <div class="ha-full">
-          <h3>Experience &amp; leadership</h3>
-          <p><strong>Senior Product Designer</strong> with 13+ years of experience designing enterprise, fintech, SaaS, and platform products across web, mobile, ATM, and operational systems. Proven expertise leading products from discovery through delivery using Agile and Lean methodologies while partnering closely with business stakeholders, Product Management, Engineering, Research, Accessibility, and executive leadership. Experienced in business analysis, requirements elicitation, stakeholder management, business process improvement, product strategy, and translating complex business needs into intuitive, user-centered digital solutions.</p>
-          <h3>Project Management &amp; Business Analysis</h3>
-          <p>Experienced in leading projects from requirements gathering through delivery, defining scope, coordinating cross-functional teams, tracking milestones, and managing risks and dependencies. Skilled in stakeholder workshops, process mapping, gap analysis, requirements documentation, Jira user stories, acceptance criteria, and solution validation to align delivery with business goals and customer needs.</p>
-          <h3>Design</h3>
-          <p>Expertise in <strong>human-centered design</strong>, user research, information architecture, interaction design, visual design, prototyping, accessibility, design systems, and data-driven decision-making.</p>
-          <p class="ha-closing">Passionate about simplifying complex workflows, improving operational efficiency, prioritizing product initiatives, and delivering scalable, measurable solutions that create meaningful outcomes for both customers and the business.</p>
+          <p>Throughout my career at <strong>Wells Fargo</strong> and <strong>Cisco</strong>, I’ve worked across teller-facing, banker-facing, customer-facing, small business, and enterprise digital platforms, helping organizations translate complex business needs into practical, scalable solutions.</p>
+          <h3>Business Analysis</h3>
+          <p>I have extensive experience collaborating with business stakeholders to gather and analyze requirements, facilitate workshops, document Business Requirements Documents (BRDs) and Functional Requirements Documents (FRDs), perform gap analysis, map business processes, define business rules, and develop Jira user stories and acceptance criteria. My focus is on understanding business challenges, improving operational workflows, and ensuring solutions align with business objectives.</p>
+          <h3>Project Management &amp; Delivery</h3>
+          <p>I have supported end-to-end project delivery in Agile environments, working closely with product managers, engineering teams, business analysts, QA, and cross-functional stakeholders. My experience includes project scope discussions, stakeholder coordination, dependency management, sprint and release planning support, risk identification, issue resolution, User Acceptance Testing (UAT), and implementation coordination.</p>
+          <h3>Product Design &amp; User Experience</h3>
+          <p>I bring deep expertise in <strong>human-centered design</strong>, UX strategy, user research, journey mapping, information architecture, interaction design, wireframing, prototyping, accessibility, and design systems. I’ve helped deliver enterprise banking experiences used by millions of customers and thousands of internal employees.</p>
+          <p>I’m experienced in Figma, FigJam, Jira, Agile methodologies, and AI-powered tools that support research, documentation, analysis, and design.</p>
+          <p>What connects all three disciplines is my ability to understand business problems, align stakeholders, translate requirements into actionable solutions, and collaborate with teams to deliver meaningful results.</p>
+          <p class="ha-closing">I’m passionate about digital transformation, business process improvement, operational efficiency, and creating technology solutions that make complex experiences simpler for customers, employees, and businesses.</p>
         </div>
       </div></div>
+      <div class="ha-actions">
+        <button type="button" class="ha-btn-link" id="haFullBtn" aria-expanded="false" aria-controls="haFull" onclick="toggleHaPanel('haFull','haFullBtn')"><span>Read full profile</span></button>
+      </div>
       <div class="ha-stats-row">
         <div class="ha-stat"><div class="n">13+</div><div class="d">Years Designing Enterprise Products</div></div>
         <div class="ha-stat"><div class="n">100%</div><div class="d">WCAG Accessibility Compliant Work</div></div>
@@ -1012,7 +1037,9 @@ window.addEventListener('DOMContentLoaded', function() {
     <div class="wf-rule"></div>
     <div class="wf-impact-row">
       <div class="wf-impact-desc">
-        <p>Designed seamless digital banking experiences across <strong>ATM, Payments, Teller, and Banker-facing applications</strong> — creating unified workflows for both B2C consumers and B2B enterprise users across SaaS platforms. Every transaction, every tap, every banker interaction — <strong>built to be trusted at scale.</strong></p>
+        <div class="wf-more" id="wfMore">
+          <p>Worked across enterprise banking and digital transformation initiatives, including <strong>digital banking, mobile and web platforms, teller-facing, banker-facing, customer-facing, small business, ATM, and internal enterprise applications.</strong></p>
+        </div>
       </div>
       <div class="wf-impact-vr"></div>
       <div class="wf-stat-block">
@@ -1029,6 +1056,20 @@ window.addEventListener('DOMContentLoaded', function() {
         <div class="wf-stat-num" style="font-size:36px;letter-spacing:-1px;">AI</div>
         <div class="wf-stat-label"><strong>Assisted</strong>Product Design</div>
       </div>
+      <div class="wf-more-extra" id="wfMoreExtra"><div class="wf-more-extra-inner">
+        <ul class="wf-more-list">
+            <li>Led business analysis, project delivery coordination, and product design activities across complex digital banking and enterprise technology initiatives.</li>
+            <li>Collaborated with business stakeholders to gather, analyze, prioritize, and document business and functional requirements.</li>
+            <li>Developed BRDs, FRDs, business process flows, functional specifications, Jira user stories, business rules, and acceptance criteria.</li>
+            <li>Facilitated stakeholder workshops, business process mapping, gap analysis, and impact assessments to identify operational improvements.</li>
+            <li>Supported Agile project delivery, including scope clarification, sprint planning, backlog refinement, dependency management, risk identification, and release coordination.</li>
+            <li>Partnered with product managers, engineering, QA, risk, compliance, and accessibility teams to align business objectives, technical requirements, and implementation.</li>
+            <li>Led UX research, journey mapping, interaction design, prototyping, usability testing, and accessible design solutions across digital banking, mobile, web, and enterprise platforms.</li>
+            <li>Contributed to digital banking modernization and customer-facing experiences serving millions of users, alongside ATM enhancements deployed across more than <strong>11,000 ATMs</strong>.</li>
+            <li>Supported UAT, implementation validation, and post-launch optimization to ensure delivered solutions met business requirements and customer needs.</li>
+          </ul>
+      </div></div>
+      <div class="wf-more-actions"><button type="button" class="wf-more-btn" id="wfMoreBtn" aria-expanded="false" aria-controls="wfMore wfMoreExtra" onclick="toggleWfMore()">Read more</button></div>
     </div>
     <div class="wf-project-row" id="wfProjects">
       <div class="wf-project-label">Projects</div>
